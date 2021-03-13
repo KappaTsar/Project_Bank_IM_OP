@@ -5,9 +5,13 @@ Final_Project for Java simple BANK App.
 Frorlduk's Holding Union
 
 Project:
+
  Front-end(okej, mozna ciangac) Hajbernejta
+ 
  Controlery(samemu)
+ 
  Testowanie*
+ 
  Web service
 
 " 13 5674 667# cccc cccc cccc cccc    2 + 8 + 16 = 26 NUM_code "
