@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void authenticate(User user) {
-        User userFromDatabase = this.userDAO.getUserByLogin(user.getLogin());
+        User userFromDatabase = this.userDAO.findUserByLogin(user.getLogin());
         if(userFromDatabase == null) {
             return;
         }
@@ -43,41 +43,53 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void changePass(User user) {
-        User getUserFromDB = this.userDAO.getUserById(user.getId());
+        User getUserFromDB = this.userDAO.findUserById(user.getId());
         getUserFromDB.setPass(user.getPass());
-        this.userDAO.updateUser(getUserFromDB);
+        this.userDAO.save(getUserFromDB);
     }
 
     @Override
     public boolean newUser(RegistrationModel registrationModel) {
-        if(this.userDAO.getUserByLogin(registrationModel.getLogin()) != null) {
+        if(this.userDAO.findUserByLogin(registrationModel.getLogin()) != null) {
             return false;
         }
 
         User newUser = new User(0, registrationModel.getLogin(), registrationModel.getPass(), User.Role.USER);
 
-        return this.userDAO.persistUser(newUser);
+        try {
+            this.userDAO.save(newUser);
+        }
+        catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean makeAccount(User chosenUser) {
-        if(this.userDAO.getUserByLogin(chosenUser.getLogin()) != null) {
+        if(this.userDAO.findUserByLogin(chosenUser.getLogin()) == null) {
             return false;
         }
 
         Account newAcc = new Account(0, chosenUser);
-
         chosenUser.addnewAcctoList(newAcc);
-        return this.accountDAO.persistAccount(newAcc);
+
+        try {
+            this.accountDAO.save(newAcc);
+        }
+        catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public User getUserById(int id) {
-        return this.userDAO.getUserById(id);
+        return this.userDAO.findUserById(id);
     }
 
     @Override
     public User getUserByLogin(String login) {
-        return this.userDAO.getUserByLogin(login);
+        return this.userDAO.findUserByLogin(login);
     }
 }

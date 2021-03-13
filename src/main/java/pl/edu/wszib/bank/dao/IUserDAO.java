@@ -1,10 +1,9 @@
 package pl.edu.wszib.bank.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import pl.edu.wszib.bank.model.User;
 
-public interface IUserDAO {
-    User getUserByLogin(String login);
-    User getUserById(int id);
-    void updateUser(User user);
-    boolean persistUser(User user);
+public interface IUserDAO extends JpaRepository<User, Integer> {
+    User findUserByLogin(String login);
+    User findUserById(int id);
 }

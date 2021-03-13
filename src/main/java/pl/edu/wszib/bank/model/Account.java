@@ -1,7 +1,6 @@
 package pl.edu.wszib.bank.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ public class Account {
     @ManyToOne(fetch = FetchType.EAGER)
     private User userID;
     private String bankInfo;
-    @ManyToMany(mappedBy = "songInstrumentalist", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<TransactionDetails> history;
 
     public Account(int id, User user){
@@ -72,5 +71,13 @@ public class Account {
 
     public String getBank() {
         return bankInfo;
+    }
+
+    public void addnewTransactionToHistory(TransactionDetails transaction) {
+        this.history.add(transaction);
+    }
+
+    public Set<TransactionDetails> getHistory() {
+        return history;
     }
 }

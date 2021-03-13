@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frorlduk's Holding Union</title>
+    <link rel="stylesheet" href="/commons.css">
+    <link rel="stylesheet" href="/newuser.css">
+    <script src="newuserValidator.js"></script>
+</head>
+
+<body class="bg" >
+
+<div th:replace="fragments.html :: logo"></div>
+
+<form class="login-cover" id="newuser-form" method="post" onsubmit="return validateUser()">
+    <p th:if="${info}" th:text="${info}" id="error"></p>
+    <input type="text"     placeholder="Login"           th:field="*{newUser.login}" id="login">
+    <input type="password" placeholder="Password"        th:field="*{newUser.pass}"  id="pass">
+    <input type="password" placeholder="Repeat password" th:field="*{newUser.pass2}" id="pass2">
+    <input type="submit"   value="Create New User">
+</form>
+
+</body>
+</html>

@@ -9,19 +9,16 @@ public class TransactionDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    @OneToOne(fetch = FetchType.EAGER)
-    private Account fromAccount;
-    @OneToOne(fetch = FetchType.EAGER)
-    private Account toAccount;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Account account;
     private Double transferAmount;
     @Temporal(TemporalType.TIME)
     private LocalDate date;
 
-    public TransactionDetails(int id, String title, Account fromAccount, Account toAccount, Double transAmount) {
+    public TransactionDetails(int id, String title, Account account, Double transAmount) {
         this.id = id;
         this.title = title;
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
+        this.account = account;
         this.transferAmount = transAmount;
         this.date = LocalDate.now();;
     }
@@ -37,20 +34,12 @@ public class TransactionDetails {
         return id;
     }
 
-    public void setFromAccount(Account fromAccount) {
-        this.fromAccount = fromAccount;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public Account getFromAccount() {
-        return fromAccount;
-    }
-
-    public void setToAccount(Account toAccount) {
-        this.toAccount = toAccount;
-    }
-
-    public Account getToAccount() {
-        return toAccount;
+    public Account getAccount() {
+        return account;
     }
 
     public void setTransferAmount(Double transAmount) {
