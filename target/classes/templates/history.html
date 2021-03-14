@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frorlduk's Holding Union</title>
+    <link rel="stylesheet" href="/commons.css">
+    <link rel="stylesheet" href="/history.css">
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+<div class="cover" id="content">
+    <a href="/accounts" class="return-button">Go Back</a>
+    <th:block th:each="transaction : ${historyList}">
+        <div class="history-box">
+            <div th:text="${transaction.title}" class="title-box"></div>
+            <div class="history-data-box">
+                <div th:text="'Amount: ' + ${transaction.transferAmount}+ 'gold'"></div>
+                <div th:text="'Date: ' + ${transaction.date}"></div>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frorlduk's Holding Union</title>
+    <link rel="stylesheet" href="/commons.css">
+    <link rel="stylesheet" href="/accounts.css">
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+<div class="cover" id="content">
+    <th:block th:each="account : ${accounts}">
+        <div class="accounts-box">
+            <div th:text="'BALANCE: ' + ${account.balance}+ 'gold'"></div>
+            <div class="accounts-data-box">
+                <div th:text="'Account NUMBER: ' + ${account.accNumber}" ></div>
+                <div th:text="'Bank Info: ' + ${account.bank}"></div>
+                <a th:href="@{/withdraw/{id}(id=${account.id})}" class="withdraw-button" th:if="${isLogged}"></a>
+                <a th:href="@{/deposit/{id}(id=${account.id})}"  class="deposit-button"  th:if="${isLogged}"></a>
+                <a th:href="@{/transfer/{id}(id=${account.id})}" class="transfer-button" th:if="${isLogged}"></a>
+                <a th:href="@{/history/{id}(id=${account.id})}"  class="history-button"  th:if="${isLogged}">View History</a>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

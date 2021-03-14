@@ -1,0 +1,25 @@
+.cover{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-image: url("content-paper.jpg");
+    background-size: cover;
+}
+
+.title-box {
+    font-size: 30px;
+    padding: 10px;
+}
+
+.history-box {
+    width: 80%;
+    margin: 15px auto;
+    border: 2px solid black;
+}
+.history-data-box {
+    font-size: 20px;
+    padding: 10px;
+}
+.history-data-box div {
+    display: inline-block;
+    margin-right: 50px;
+}

@@ -46,7 +46,7 @@ public class AccountController {
         if(!this.sessionObject.isLogged()) {
             return "redirect:/login";
         }
-        Pattern regexp = Pattern.compile("[0-9]{5}.*");
+        Pattern regexp = Pattern.compile("[0-9,]+");
         Matcher creditMatcher = regexp.matcher(depositInfo.getAmount().toString());
 
         if(!creditMatcher.matches() ) {
@@ -80,7 +80,7 @@ public class AccountController {
             return "redirect:/login";
         }
 
-        Pattern regexp = Pattern.compile("[0-9]{5}.*");
+        Pattern regexp = Pattern.compile("[0-9,]+");
         Matcher creditMatcher = regexp.matcher(withdrawInfo.getAmount().toString());
 
         if(!creditMatcher.matches() ) {
@@ -92,40 +92,65 @@ public class AccountController {
         return "redirect:/accounts";
     }
 
-    @RequestMapping(value = "/transaction/{id}", method = RequestMethod.GET)
-    public String transaction(@PathVariable int id, Model model) {
+    @RequestMapping(value = "/transfer/{id}", method = RequestMethod.GET)
+    public String transfer(@PathVariable int id, Model model) {
         if( !this.sessionObject.isLogged()) {
             return "redirect:/login";
         }
 
-        Account accountFrom = this.accountService.getAccountById(id);
+        Account account = this.accountService.getAccountById(id);
 
-        model.addAttribute("accFrom", accountFrom);
+        model.addAttribute("curAccount", account);
         model.addAttribute("transInfo", new TransactionModel());
         model.addAttribute("info", this.sessionObject.getInfo());
         model.addAttribute("isLogged", this.sessionObject.isLogged());
-        return "transaction";
+        return "transfer";
     }
 
-    @RequestMapping(value = "/transaction/{id}", method = RequestMethod.POST)
-    public String transaction(@ModelAttribute TransactionModel depositInfo, @ModelAttribute Account curAccount) {
+    @RequestMapping(value = "/transfer/{id}", method = RequestMethod.POST)
+    public String transfer(@ModelAttribute TransactionModel transInfo, @ModelAttribute Account curAccount) {
         if(!this.sessionObject.isLogged()) {
             return "redirect:/login";
         }
-        Pattern regexpText = Pattern.compile("[A-Za-z0-9]{5}.*");
-        Pattern regexpNum = Pattern.compile("[0-9]{5}.*");
-        Matcher titleMatcher = regexpText.matcher(depositInfo.getTitle());
-        Matcher accountNumMatcher = regexpNum.matcher(depositInfo.getAccNumber());
-        Matcher creditMatcher = regexpNum.matcher(depositInfo.getAmount().toString());
+        Pattern regexpText = Pattern.compile("[A-Za-z0-9,.]{3}.*");
+        Matcher titleMatcher = regexpText.matcher(transInfo.getTitle());
+        Pattern regexpNum = Pattern.compile("[0-9]{26}");
+        Matcher accountNumMatcher = regexpNum.matcher(transInfo.getAccNumber());
+        Pattern regexpCred = Pattern.compile("[0-9,]+");
+        Matcher creditMatcher = regexpCred.matcher(transInfo.getAmount().toString());
 
         if(!titleMatcher.matches()
                 || !accountNumMatcher.matches()
                 || !creditMatcher.matches() ) {
             this.sessionObject.setInfo("input error !!");
-            return "redirect:/deposit/{id}";
+            return "redirect:/transfer/{id}";
         }
 
-        this.accountService.crossAccTransfer(depositInfo.getTitle(), depositInfo.getAccNumber(), curAccount, depositInfo.getAmount());
+        this.accountService.crossAccTransfer(transInfo.getTitle(), transInfo.getAccNumber(), curAccount, transInfo.getAmount());
         return "redirect:/accounts";
+    }
+
+    @RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
+    public String history(@PathVariable int id, Model model) {
+        if( !this.sessionObject.isLogged()) {
+            return "redirect:/login";
+        }
+
+        Account account = this.accountService.getAccountById(id);
+
+        model.addAttribute("historyList", account.getHistory());
+        return "history";
+    }
+
+    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
+    public String accounts(Model model) {
+        if( !this.sessionObject.isLogged()) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("curUser", this.sessionObject.getLoggedUser());
+        model.addAttribute("accounts", this.accountService.viewAccounts(this.sessionObject.getLoggedUser()));
+        model.addAttribute("isLogged", this.sessionObject.isLogged());
+        return "accounts";
     }
 }

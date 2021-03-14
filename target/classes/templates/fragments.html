@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div  id="menu" th:fragment="menu">
+    <a href="/main" class="menu-button">Main Page</a>
+    <a href="/accounts" class="menu-button" th:if="${isLogged}">Accounts</a>
+    <a href="/newacc"   class="menu-button" th:if="${isLogged && role == 'ADMIN'}">Create New Account</a>
+    <a href="/newuser"  class="menu-button" th:if="${isLogged && role == 'ADMIN'}">Create New User</a>
+    <a href="/newpass"  class="menu-button" th:if="${isLogged}">Change Password</a>
+    <a href="/logout"   class="menu-button" th:if="${isLogged}">Log Out</a>
+    <a href="/login"    class="menu-button" th:if="${!isLogged}">Sigh In</a>
+</div>
+
+<img th:if="${!isLogged}" src="/top_head.jpg" id="logo" th:fragment="logo">
+<img th:if="${isLogged}"  src="/logo.jpg"     id="logo" th:fragment="logo">
+
+
+<div id="background" th:fragment="background"></div>
+
+</body>
+</html>

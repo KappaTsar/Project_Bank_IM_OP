@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frorlduk's Holding Union</title>
+    <link rel="stylesheet" href="/commons.css">
+    <link rel="stylesheet" href="/register.css">
+    <script src="newaccValidator.js"></script>
+</head>
+<body class="bg" >
+
+<div th:replace="fragments.html :: logo"></div>
+
+<form class="login-cover" id="newacc-form" method="post" onsubmit="return validateAcc()">
+    <p th:if="${info}" th:text="${info}" id="error"></p>
+    <input type="text" placeholder="Create new Account for User with login:"
+           th:field="*{newAccMod.chosenLogin}" id="login">
+    <input type="submit" value="Create Account">
+</form>
+<a href="/main" class="return-button">Cancel</a>
+</body>
+</html>

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.edu.wszib.bank.model.User;
@@ -64,34 +63,34 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/newacc_for_user", method = RequestMethod.GET)
-    public String createAccount(@PathVariable int id, Model model) {
+    @RequestMapping(value = "/newacc", method = RequestMethod.GET)
+    public String createAccount(Model model) {
         if(!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
             return "redirect:/login";
         }
 
-        model.addAttribute("newAcc", new AccCreationModel());
+        model.addAttribute("newAccMod", new AccCreationModel());
         model.addAttribute("info", this.sessionObject.getInfo());
         model.addAttribute("isLogged", this.sessionObject.isLogged());
         model.addAttribute("role", this.sessionObject.isLogged() ? this.sessionObject.getLoggedUser().getRole().toString() : null);
 
-        return "newacc_for_user";
+        return "newacc";
     }
 
-    @RequestMapping(value = "/newacc_for_user", method = RequestMethod.POST)
-    public String createAccount(@ModelAttribute AccCreationModel newAcc) {
+    @RequestMapping(value = "/newacc", method = RequestMethod.POST)
+    public String createAccount(@ModelAttribute AccCreationModel newAccMod) {
         if(!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
             return "redirect:/login";
         }
 
         Pattern regexp = Pattern.compile("[A-Za-z0-9]{5}.*");
-        Matcher loginMatcher = regexp.matcher(newAcc.getChosenLogin());
+        Matcher loginMatcher = regexp.matcher(newAccMod.getChosenLogin());
 
         if(!loginMatcher.matches()) {
             this.sessionObject.setInfo("validation error !!");
             return "redirect:/newuser";
         }
-        if(this.userService.makeAccount(this.userService.getUserByLogin(newAcc.getChosenLogin()))) {
+        if(this.userService.makeAccount(this.userService.getUserByLogin(newAccMod.getChosenLogin()))) {
             return "redirect:/login";
         } else {
             this.sessionObject.setInfo("account creating error!!");

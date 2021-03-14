@@ -1,0 +1,61 @@
+.cover{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-image: url("content-paper.jpg");
+    background-size: cover;
+}
+
+.balance-box {
+    font-size: 25px;
+    padding: 10px;
+}
+
+.accounts-box {
+    width: 80%;
+    margin: 15px auto;
+    border: 2px solid black;
+}
+.accounts-data-box {
+    font-size: 20px;
+    padding: 10px;
+}
+.accounts-data-box div {
+    display: inline-block;
+    margin-right: 50px;
+}
+.withdraw-button {
+    background-image: url("withdraw.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+}
+.deposit-button {
+    background-image: url("deposit.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+}
+.transfer-button {
+    background-image: url("transfer.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+}
+.history-button {
+    background-image: url("history.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frorlduk's Holding Union</title>
+    <link rel="stylesheet" href="/commons.css">
+    <link rel="stylesheet" href="/trans.css">
+    <script src="transValidator.js"></script>
+</head>
+<body class="bg" >
+
+<div th:replace="fragments.html :: logo"></div>
+
+<form class="transfer" id="trans-form" method="post" onsubmit="return validateTransfer()">
+    <p th:if="${info}" th:text="${info}" id="error"></p>
+    <input type="text"  placeholder="Title"              th:field="*{transInfo.title}"     id="title">
+    <input type="text"  placeholder="Account NUMBER"     th:field="*{transInfo.accNumber}" id="accNumber">
+    <input type="text"  placeholder="Amount To Transfer" th:field="*{transInfo.amount}"    id="amount">
+    <input type="submit" value="Complete">
+</form>
+<a href="/accounts" class="return-button">Cancel</a>
+</body>
+</html>

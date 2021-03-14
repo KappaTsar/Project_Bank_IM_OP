@@ -1,0 +1,70 @@
+.transfer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-image: url("content-paper.jpg");
+    background-size: cover;
+}
+
+#trans-form-form {
+    width: 800px;
+    margin: 70px auto;
+}
+#trans-form input[type="text"] {
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+    font-size: 26px;
+    padding: 5px;
+    text-align: center;
+}
+#trans-form input[type="submit"] {
+    width: 200px;
+    margin: 10px auto;
+    display: block;
+    font-size: 26px;
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: color 0.5s, background-color 0.5s;
+}
+#innerTrans-form input[type="submit"]:hover {
+    color: white;
+    background-color: black;
+}
+
+#innerTrans-form {
+    width: 800px;
+    margin: 70px auto;
+}
+#innerTrans-form input[type="text"] {
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+    font-size: 26px;
+    padding: 5px;
+    text-align: center;
+}
+
+#innerTrans-form input[type="submit"] {
+    width: 200px;
+    margin: 10px auto;
+    display: block;
+    font-size: 26px;
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: color 0.5s, background-color 0.5s;
+}
+#innerTrans-form input[type="submit"]:hover {
+    color: white;
+    background-color: black;
+}
+#error {
+    color: red;
+    font-size:26px;
+    text-align: center;
+}

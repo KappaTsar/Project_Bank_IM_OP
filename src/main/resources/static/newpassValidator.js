@@ -10,18 +10,18 @@ function validatePass() {
         document.getElementById("oldpass").style.backgroundColor = 'RED';
         flag = false;
     } else {
-        document.getElementById("login").style.backgroundColor = 'WHITE';
+        document.getElementById("oldpass").style.backgroundColor = 'WHITE';
     }
 
     if(!regex.test(newpass)) {
         document.getElementById("newpass").style.backgroundColor = 'RED';
         flag = false;
     } else {
-        document.getElementById("pass").style.backgroundColor = 'WHITE';
+        document.getElementById("newpass").style.backgroundColor = 'WHITE';
     }
 
     if(!regex.test(newpass2)) {
-        document.getElementById("pass2").style.backgroundColor = 'RED';
+        document.getElementById("newpass2").style.backgroundColor = 'RED';
         flag = false;
     } else {
         document.getElementById("newpass2").style.backgroundColor = 'WHITE';
@@ -33,8 +33,8 @@ function validatePass() {
         flag = false;
     } else {
         if(flag) {
-            document.getElementById("pass").style.backgroundColor = 'WHITE';
-            document.getElementById("pass2").style.backgroundColor = 'WHITE';
+            document.getElementById("newpass").style.backgroundColor = 'WHITE';
+            document.getElementById("newpass2").style.backgroundColor = 'WHITE';
         }
     }
 

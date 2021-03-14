@@ -1,6 +1,7 @@
 package pl.edu.wszib.bank.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pl.edu.wszib.bank.dao.IAccountDAO;
 import pl.edu.wszib.bank.dao.IUserDAO;
@@ -18,9 +19,12 @@ public class UserServiceImpl implements IUserService {
     @Resource
     SessionObject sessionObject;
 
+
+    @Qualifier("IUserDAO")
     @Autowired
     IUserDAO userDAO;
 
+    @Qualifier("IAccountDAO")
     @Autowired
     IAccountDAO accountDAO;
 

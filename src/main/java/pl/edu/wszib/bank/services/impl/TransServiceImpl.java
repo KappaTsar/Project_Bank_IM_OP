@@ -1,6 +1,7 @@
 package pl.edu.wszib.bank.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pl.edu.wszib.bank.dao.ITransactionDAO;
 import pl.edu.wszib.bank.model.Account;
@@ -10,6 +11,7 @@ import pl.edu.wszib.bank.services.ITransService;
 @Service
 public class TransServiceImpl implements ITransService {
 
+    @Qualifier("ITransactionDAO")
     @Autowired
     ITransactionDAO transactionDAO;
 

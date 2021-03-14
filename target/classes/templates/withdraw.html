@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Frorlduk's Holding Union</title>
+    <link rel="stylesheet" href="/commons.css">
+    <link rel="stylesheet" href="/trans.css">
+    <script src="innertransValidator.js"></script>
+</head>
+<body class="bg" >
+
+<div th:replace="fragments.html :: logo"></div>
+
+<form class="transfer" id="innerTrans-form" method="post" onsubmit="return validateMoney()">
+    <p th:if="${info}" th:text="${info}" id="error"></p>
+    <input type="text" placeholder="Amount to withdraw:"  th:field="*{withdrawInfo.amount}" id="amount">
+    <input type="submit" value="Complete">
+</form>
+<a href="/accounts" class="return-button">Cancel</a>
+
+</body>
+</html>
