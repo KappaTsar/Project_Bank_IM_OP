@@ -12,7 +12,6 @@ public class TransactionDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     private Account account;
     private Double transferAmount;
-    @Temporal(TemporalType.TIME)
     private LocalDate date;
 
     public TransactionDetails(int id, String title, Account account, Double transAmount) {

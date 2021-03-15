@@ -10,7 +10,6 @@ import pl.edu.wszib.bank.configuration.AppConfigTest;
 import pl.edu.wszib.bank.dao.ITransactionDAO;
 import pl.edu.wszib.bank.services.ITransService;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfigTest.class})

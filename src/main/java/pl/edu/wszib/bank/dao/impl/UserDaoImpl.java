@@ -1,7 +1,18 @@
 package pl.edu.wszib.bank.dao.impl;
 
-public class UserDaoImpl {
-    /*
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import pl.edu.wszib.bank.dao.IUserDAO;
+import pl.edu.wszib.bank.model.User;
+
+import javax.persistence.NoResultException;
+
+@Repository
+public class UserDaoImpl implements IUserDAO {
     @Autowired
     SessionFactory sessionFactory;
 
@@ -70,7 +81,6 @@ public class UserDaoImpl {
         }
         return false;
     }
-     */
 }
 
 

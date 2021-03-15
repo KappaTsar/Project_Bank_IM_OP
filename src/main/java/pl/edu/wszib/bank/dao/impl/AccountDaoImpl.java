@@ -1,7 +1,21 @@
 package pl.edu.wszib.bank.dao.impl;
 
-public class AccountDaoImpl {
-    /*
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import pl.edu.wszib.bank.dao.IAccountDAO;
+import pl.edu.wszib.bank.model.Account;
+import pl.edu.wszib.bank.model.User;
+
+import javax.persistence.NoResultException;
+import java.util.List;
+
+@Repository
+public class AccountDaoImpl implements IAccountDAO {
+
     @Autowired
     SessionFactory sessionFactory;
 
@@ -78,5 +92,5 @@ public class AccountDaoImpl {
         session.close();
         return accounts;
     }
-     */
+
 }

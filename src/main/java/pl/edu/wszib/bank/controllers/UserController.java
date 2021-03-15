@@ -80,8 +80,14 @@ public class UserController {
             return "redirect:/newpass";
         }
 
-        this.userService.changePass(curUser);
-        return "redirect:/login";
+
+        if(this.userService.changePass(curUser, NewPass)) {
+            return "redirect:/main";
+        } else {
+            this.sessionObject.setInfo("wrong password!!");
+            return "redirect:/logout";
+        }
+
     }
 
 }

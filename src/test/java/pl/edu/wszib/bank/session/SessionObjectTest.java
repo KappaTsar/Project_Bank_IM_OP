@@ -2,8 +2,16 @@ package pl.edu.wszib.bank.session;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import pl.edu.wszib.bank.configuration.AppConfigTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {AppConfigTest.class})
+@WebAppConfiguration
 class SessionObjectTest {
 
     @Test

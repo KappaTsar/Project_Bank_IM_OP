@@ -1051,5 +1051,155 @@
       <ObjectGrants>ALL PRIVILEGES!
 </ObjectGrants>
     </user>
+    <table id="334" parent="2" name="taccount">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="335" parent="2" name="taccount_ttransaction">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="336" parent="2" name="ttransaction">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="337" parent="2" name="tuser">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="338" parent="2" name="tuser_taccount">
+      <Engine>MyISAM</Engine>
+    </table>
+    <column id="339" parent="334" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="340" parent="334" name="accNumber">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="341" parent="334" name="balance">
+      <Position>3</Position>
+      <DataType>double|0s</DataType>
+    </column>
+    <column id="342" parent="334" name="bankInfo">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="343" parent="334" name="userID_id">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <index id="344" parent="334" name="FK2xs4mvvpi6c6ll3p6nuhswnge">
+      <ColNames>userID_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="345" parent="334" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="346" parent="335" name="taccount_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="347" parent="335" name="history_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="348" parent="335" name="UK_nsx2od68bc3fowk49s03xw3ya">
+      <ColNames>history_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="349" parent="335" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>taccount_id
+history_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="350" parent="335" name="UK_nsx2od68bc3fowk49s03xw3ya">
+      <ColNames>history_id</ColNames>
+      <UnderlyingIndexName>UK_nsx2od68bc3fowk49s03xw3ya</UnderlyingIndexName>
+    </key>
+    <column id="351" parent="336" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="352" parent="336" name="date">
+      <Position>2</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="353" parent="336" name="title">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="354" parent="336" name="transferAmount">
+      <Position>4</Position>
+      <DataType>double|0s</DataType>
+    </column>
+    <column id="355" parent="336" name="account_id">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <index id="356" parent="336" name="FKiqi5g3mnbmy97o2ffrf7bp8du">
+      <ColNames>account_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="357" parent="336" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="358" parent="337" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="359" parent="337" name="login">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="360" parent="337" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="361" parent="337" name="role">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <key id="362" parent="337" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="363" parent="338" name="tuser_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="364" parent="338" name="accountList_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="365" parent="338" name="UK_loppuhd07lardxu5gsxyajlnm">
+      <ColNames>accountList_id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="366" parent="338" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>tuser_id
+accountList_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="367" parent="338" name="UK_loppuhd07lardxu5gsxyajlnm">
+      <ColNames>accountList_id</ColNames>
+      <UnderlyingIndexName>UK_loppuhd07lardxu5gsxyajlnm</UnderlyingIndexName>
+    </key>
   </database-model>
 </dataSource>

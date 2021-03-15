@@ -11,7 +11,6 @@ import pl.edu.wszib.bank.services.ITransService;
 @Service
 public class TransServiceImpl implements ITransService {
 
-    @Qualifier("ITransactionDAO")
     @Autowired
     ITransactionDAO transactionDAO;
 
@@ -19,11 +18,6 @@ public class TransServiceImpl implements ITransService {
     public void makeTransaction(String title, Account account, Double transAmount) {
         TransactionDetails transaction = new TransactionDetails(0, title, account, transAmount);
         account.addnewTransactionToHistory(transaction);
-        this.transactionDAO.save(transaction);
-    }
-
-    @Override
-    public TransactionDetails getTransById(int id) {
-        return this.transactionDAO.findTransactionDetailsById(id);
+        this.transactionDAO.saveTrans(transaction);
     }
 }

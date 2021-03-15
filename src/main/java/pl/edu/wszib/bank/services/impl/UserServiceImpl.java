@@ -1,12 +1,12 @@
 package pl.edu.wszib.bank.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pl.edu.wszib.bank.dao.IAccountDAO;
 import pl.edu.wszib.bank.dao.IUserDAO;
 import pl.edu.wszib.bank.model.Account;
 import pl.edu.wszib.bank.model.User;
+import pl.edu.wszib.bank.model.view.NewPassModel;
 import pl.edu.wszib.bank.model.view.RegistrationModel;
 import pl.edu.wszib.bank.services.IUserService;
 import pl.edu.wszib.bank.session.SessionObject;
@@ -19,18 +19,15 @@ public class UserServiceImpl implements IUserService {
     @Resource
     SessionObject sessionObject;
 
-
-    @Qualifier("IUserDAO")
     @Autowired
     IUserDAO userDAO;
 
-    @Qualifier("IAccountDAO")
     @Autowired
     IAccountDAO accountDAO;
 
     @Override
     public void authenticate(User user) {
-        User userFromDatabase = this.userDAO.findUserByLogin(user.getLogin());
+        User userFromDatabase = this.userDAO.getUserByLogin(user.getLogin());
         if(userFromDatabase == null) {
             return;
         }
@@ -46,22 +43,32 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void changePass(User user) {
-        User getUserFromDB = this.userDAO.findUserById(user.getId());
-        getUserFromDB.setPass(user.getPass());
-        this.userDAO.save(getUserFromDB);
+    public boolean changePass(User user, NewPassModel newPass) {
+        if(!user.getPass().equals(newPass.getOld_pass())) {
+            return false;
+        }
+
+        User getUserFromDB = this.userDAO.getUserById(user.getId());
+        getUserFromDB.setPass(newPass.getNew_pass());
+        try {
+            this.userDAO.updateUser(getUserFromDB);
+        }
+        catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean newUser(RegistrationModel registrationModel) {
-        if(this.userDAO.findUserByLogin(registrationModel.getLogin()) != null) {
+        if(this.userDAO.getUserByLogin(registrationModel.getLogin()) != null) {
             return false;
         }
 
         User newUser = new User(0, registrationModel.getLogin(), registrationModel.getPass(), User.Role.USER);
 
         try {
-            this.userDAO.save(newUser);
+            this.userDAO.persistUser(newUser);
         }
         catch(Exception e){
             return false;
@@ -71,7 +78,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean makeAccount(User chosenUser) {
-        if(this.userDAO.findUserByLogin(chosenUser.getLogin()) == null) {
+        if(this.userDAO.getUserByLogin(chosenUser.getLogin()) == null) {
             return false;
         }
 
@@ -79,7 +86,7 @@ public class UserServiceImpl implements IUserService {
         chosenUser.addnewAcctoList(newAcc);
 
         try {
-            this.accountDAO.save(newAcc);
+            this.accountDAO.persistAccount(newAcc);
         }
         catch(Exception e){
             return false;
@@ -89,11 +96,11 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User getUserById(int id) {
-        return this.userDAO.findUserById(id);
+        return this.userDAO.getUserById(id);
     }
 
     @Override
     public User getUserByLogin(String login) {
-        return this.userDAO.findUserByLogin(login);
+        return this.userDAO.getUserByLogin(login);
     }
 }
